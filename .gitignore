@@ -1,0 +1,12 @@
+# C++
+*.vcxproj
+*.vcxproj.filters
+*.slnx
+.vs/
+x64/
+Debug/
+Release/
+
+# Java
+*.class
+out/
