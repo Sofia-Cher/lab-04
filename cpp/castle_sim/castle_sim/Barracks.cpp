@@ -1,5 +1,7 @@
-#include "barracks.hpp"
+#include "Barracks.hpp"
+#include "Exceptions.hpp"
 #include <iostream>
+#include <stdexcept>
 
 Barracks::Barracks(const std::string& name, int capacity)
     : m_name(name), m_capacity(capacity)
@@ -7,19 +9,21 @@ Barracks::Barracks(const std::string& name, int capacity)
     std::cout << "[Barracks] Построена казарма: " << m_name << " (вместимость " << m_capacity << ")\n";
 }
 
-Barracks::~Barracks() { std::cout << "[Barracks] Казарма " << m_name << " разрушена\n"; }
+Barracks::~Barracks() noexcept { std::cout << "[Barracks] Казарма " << m_name << " разрушена\n"; }
 
-bool Barracks::Recruit(const std::shared_ptr<BaseResident>& resident)
+void Barracks::Recruit(const std::shared_ptr<BaseResident>& resident)
 {
-    if (!resident) { std::cout << "[Barracks] Ошибка: пустой указатель\n"; return false; }
+    // Все проверки — до изменения состояния (строгая гарантия безопасности).
+    if (!resident)
+    {
+        throw std::invalid_argument{ "нельзя зачислить пустого жителя" };
+    }
     if (static_cast<int>(m_soldiers.size()) >= m_capacity)
     {
-        std::cout << "[Barracks] Отказ: казарма " << m_name << " переполнена\n";
-        return false;
+        throw BarracksFullException{ m_name, m_capacity };
     }
     m_soldiers.push_back(resident);
     std::cout << "[Barracks] " << resident->GetName() << " зачислен в " << m_name << "\n";
-    return true;
 }
 
 void Barracks::ReportStatus() const
