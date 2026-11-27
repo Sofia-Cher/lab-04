@@ -2,6 +2,7 @@
 *.vcxproj
 *.vcxproj.filters
 *.slnx
+*.vcxproj.user
 .vs/
 x64/
 Debug/

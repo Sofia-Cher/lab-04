@@ -16,7 +16,7 @@ BaseResident::BaseResident(const BaseResident& other)
     std::cout << "[BaseResident] Создана КОПИЯ жителя: " << m_name << "\n";
 }
 
-BaseResident::~BaseResident()
+BaseResident::~BaseResident() noexcept
 {
     std::cout << "[BaseResident] Уничтожен житель: " << m_name << "\n";
 }

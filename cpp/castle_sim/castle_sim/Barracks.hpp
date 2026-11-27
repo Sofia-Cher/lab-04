@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include "BaseResident.hpp"
 #include <string>
 #include <vector>
@@ -14,8 +13,12 @@ private:
 
 public:
     Barracks(const std::string& name, int capacity);
-    ~Barracks();
-    bool Recruit(const std::shared_ptr<BaseResident>& resident);
+    ~Barracks() noexcept;
+    Barracks(Barracks&&) noexcept = default;
+    Barracks& operator=(Barracks&&) noexcept = default;
+
+    // Бросает std::invalid_argument (пустой указатель) и BarracksFullException (нет мест).
+    void Recruit(const std::shared_ptr<BaseResident>& resident);
     void ReportStatus() const;
     int GetSoldierCount() const;
     const std::string& GetName() const;

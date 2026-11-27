@@ -6,7 +6,7 @@ Soldier::Soldier(const std::string& name, const std::string& weapon)
     std::cout << "[Soldier] Воин " << name << " вооружен: " << m_weapon << "\n";
 }
 
-Soldier::~Soldier() { std::cout << "[Soldier] Воин уничтожен\n"; }
+Soldier::~Soldier() noexcept { std::cout << "[Soldier] Воин уничтожен\n"; }
 
 std::string Soldier::GetProfession() const { return "Воин"; }
 
