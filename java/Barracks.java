@@ -13,15 +13,16 @@ public class Barracks {
         System.out.println("[Barracks] Построена казарма: " + name + " (вместимость " + capacity + ")");
     }
 
-    public boolean recruit(BaseResident resident) {
-        if (resident == null) return false;
+    // Бросает IllegalArgumentException (null) и BarracksFullException (нет мест).
+    public void recruit(BaseResident resident) {
+        if (resident == null) {
+            throw new IllegalArgumentException("нельзя зачислить пустого жителя");
+        }
         if (soldiers.size() >= capacity) {
-            System.out.println("[Barracks] Отказ: казарма переполнена");
-            return false;
+            throw new BarracksFullException(name, capacity);
         }
         soldiers.add(resident);
         System.out.println("[Barracks] " + resident.getName() + " зачислен в " + name);
-        return true;
     }
 
     public void reportStatus() {

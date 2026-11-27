@@ -1,4 +1,4 @@
-public class Soldier extends BaseResident {
+public class Soldier extends BaseResident implements Comparable<Soldier> {
     private String weapon;
 
     public Soldier(String name, String weapon) {
@@ -23,5 +23,14 @@ public class Soldier extends BaseResident {
     @Override
     public String describe() {
         return super.describe() + " | Профессия: " + getProfession() + ", Оружие: " + weapon;
+    }
+
+    // Скрывает static-метод базы (не переопределяет).
+    public static String getKind() { return "воин"; }
+
+    // Стандартный интерфейс: упорядочиваем воинов по имени.
+    @Override
+    public int compareTo(Soldier other) {
+        return getName().compareTo(other.getName());
     }
 }

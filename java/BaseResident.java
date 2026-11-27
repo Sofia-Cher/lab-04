@@ -27,6 +27,9 @@ public abstract class BaseResident {
         return "Житель " + name + " (Здоровье: " + health + ")";
     }
 
+    // static-метод: связывается рано, по типу ссылки (для демонстрации раннего связывания).
+    public static String getKind() { return "житель"; }
+
     public static int getTotalResidents() { return totalResidents; }
 
     public String getName() { return name; }
