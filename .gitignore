@@ -9,4 +9,4 @@ Release/
 
 # Java
 *.class
-out/
+out/*.vcxproj.user 
